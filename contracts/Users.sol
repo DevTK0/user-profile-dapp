@@ -1,6 +1,21 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
+contract Session {
+    string public user;
+    uint256 public login_datetime = 0;
+    uint256 public logout_datetime = 0;
+
+    constructor(string memory username, uint256 login) {
+        user = username;
+        login_datetime = login;
+    }
+
+    function logoutSession(uint256 logout) public {
+        logout_datetime = logout;
+    }
+}
+
 contract Users {
     struct UserData {
         string user;
@@ -8,6 +23,7 @@ contract Users {
     }
 
     mapping(string => UserData) private users;
+    mapping(string => address[]) private sessions;
     string[] lookup;
 
     constructor() {}
@@ -20,6 +36,35 @@ contract Users {
         return (users[key].user, users[key].password);
     }
 
+    function login(string memory user, string memory password)
+        public
+        returns (address)
+    {
+        bool result = compareStrings(users[user].password, password);
+
+        if (result) {
+            Session session = new Session(user, block.timestamp);
+            sessions[user].push(address(session));
+            return address(session);
+        } else {
+            return address(0);
+        }
+    }
+
+    function logout(string memory user, address session) public returns (bool) {
+        address[] storage sessionList = sessions[user];
+        for (uint256 i = 0; i < sessionList.length; i++) {
+            if (sessionList[i] == session) {
+                Session(sessionList[i]).logoutSession(block.timestamp);
+                sessionList[i] = sessionList[sessionList.length - 1];
+                sessionList.pop();
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     function getAllUsers() public view returns (UserData[] memory) {
         UserData[] memory allUsers = new UserData[](lookup.length);
         for (uint256 i = 0; i < lookup.length; i++) {
@@ -29,6 +74,7 @@ contract Users {
     }
 
     function addUser(string memory user, string memory password) public {
+        require(compareStrings(users[user].user, ""), "User already exists.");
         UserData memory newUser = UserData(user, password);
         users[user] = newUser;
         lookup.push(user);

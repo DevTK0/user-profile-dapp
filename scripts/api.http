@@ -1,0 +1,32 @@
+### 
+POST http://localhost:3000/api/getAllUsers
+content-type: application/json
+
+### 
+POST http://localhost:3000/api/signup
+content-type: application/json
+
+{
+    "user": "user1",
+    "password": "pass123"
+}
+
+
+### 
+POST http://localhost:3000/api/login
+content-type: application/json
+
+{
+    "user": "user1",
+    "password": "pass123"
+}
+
+
+### 
+POST http://localhost:3000/api/logout
+content-type: application/json
+
+{
+    "user": "user1",
+    "session": "0x567556A1bF06c9b37bCcD31eb0416FBb394A0ddC"
+}

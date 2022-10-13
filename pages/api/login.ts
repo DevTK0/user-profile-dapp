@@ -18,7 +18,11 @@ export default async function handler(
 
     const { user, password } = req.body;
 
-    await users.addUser(user, password);
+    const session = await users.login(user, password);
 
-    return res.status(200).json({ message: `${user} created successfully` });
+    console.log(session);
+
+    return res
+        .status(200)
+        .json({ message: `${user} login successful: ${session}` });
 }
