@@ -1,16 +1,19 @@
 import type { NextPage } from "next";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 
-const people = [
-    {
-        user: "Lindsay Walton",
-        email: "lindsay.walton@example.com",
-        role: "Member",
-    },
-    // More people...
-];
-
 const Home: NextPage = () => {
+    const [users, setUsers] = useState([[]]);
+
+    useEffect(() => {
+        fetch("api/getAllUsers")
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                setUsers(data.allUsers);
+            });
+    }, []);
+
     return (
         <>
             <Header />
@@ -21,8 +24,7 @@ const Home: NextPage = () => {
                             Users
                         </h1>
                         <p className="mt-2 text-sm text-gray-700">
-                            A list of all the users in your account including
-                            their name, title, email and role.
+                            A list of all the users in your account.
                         </p>
                     </div>
                     <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
@@ -51,13 +53,7 @@ const Home: NextPage = () => {
                                                 scope="col"
                                                 className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                                             >
-                                                Email
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                                            >
-                                                Role
+                                                Password
                                             </th>
                                             <th
                                                 scope="col"
@@ -70,16 +66,13 @@ const Home: NextPage = () => {
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-gray-200 bg-white">
-                                        {people.map((person) => (
-                                            <tr key={person.email}>
+                                        {users.map((user) => (
+                                            <tr key={user[0]}>
                                                 <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                    {person.user}
+                                                    {user[0]}
                                                 </td>
                                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                    {person.email}
-                                                </td>
-                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                    {person.role}
+                                                    {user[1]}
                                                 </td>
                                                 <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                                     <a
@@ -88,7 +81,7 @@ const Home: NextPage = () => {
                                                     >
                                                         Edit
                                                         <span className="sr-only">
-                                                            , {person.user}
+                                                            , {user[0]}
                                                         </span>
                                                     </a>
                                                 </td>
