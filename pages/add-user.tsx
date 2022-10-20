@@ -141,8 +141,9 @@ const Dashboard: NextPage = () => {
                                             autoComplete="role"
                                             className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
                                         >
-                                            <option>admin</option>
-                                            <option>member</option>
+                                            <option>pirate king</option>
+                                            <option>bucanneer</option>
+                                            <option>scurvey dog</option>
                                         </select>
                                     </div>
                                 </div>
@@ -151,7 +152,7 @@ const Dashboard: NextPage = () => {
 
                         <div className="pt-5">
                             <div className="flex justify-end">
-                                <Link href="/dashboard">
+                                <Link href="/admin-panel">
                                     <button
                                         type="button"
                                         className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
