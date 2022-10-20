@@ -24,6 +24,15 @@ npm install
 npm run dev
 ```
 
+## Environment Variables
+
+```
+API_URL=https://eth-goerli.g.alchemy.com/v2/<Alchemy API URL>
+API_KEY=<Alechmy API Key>
+PRIVATE_KEY=<WALLET PRIVATE KEY>
+CONTRACT_ADDRESS=<USERS SMART CONTRACT ADDRESS>
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Hardhat
