@@ -5,7 +5,10 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { getCookie, setCookie } from "cookies-next";
 import { NextRouter, useRouter } from "next/router";
 
-const navigation = [{ name: "Dashboard", href: "#", current: true }];
+const navigation = [
+    { name: "Admin", href: "/admin", current: true },
+    { name: "Search", href: "/secret-treasure", current: true },
+];
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
