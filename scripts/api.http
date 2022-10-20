@@ -18,7 +18,7 @@ content-type: application/json
 
 {
     "user": "user1",
-    "password": "pass123"
+    "password": "pass12345"
 }
 
 
@@ -28,5 +28,5 @@ content-type: application/json
 
 {
     "user": "user1",
-    "session": "0x567556A1bF06c9b37bCcD31eb0416FBb394A0ddC"
+    "session": "0x2F1639B56EC16857d33a9D468618aE66Bf02b592"
 }

@@ -16,11 +16,11 @@ export default async function handler(
     const signer = new ethers.Wallet(PRIVATE_KEY, provider);
     const users = new ethers.Contract(CONTRACT_ADDRESS, contract.abi, signer);
 
-    const { user, session } = req.body;
+    const { username, session } = req.body;
 
-    const logoutTx = await users.logout(user, session);
+    const logoutTx = await users.logout(username, session);
     const result = await logoutTx.wait();
     const success = result.events[0].args.value;
 
-    return res.status(200).json({ message: `${user} ${success}` });
+    return res.status(200).json({ message: `${username} ${success}` });
 }

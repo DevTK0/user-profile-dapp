@@ -17,7 +17,7 @@ function classNames(...classes: string[]) {
 
 async function signOut(user: string, sessionId: string, router: NextRouter) {
     const data = {
-        user: user,
+        username: user,
         session: sessionId,
     };
 
