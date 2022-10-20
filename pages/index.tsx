@@ -1,9 +1,15 @@
+import { XCircleIcon } from "@heroicons/react/24/outline";
 import { setCookie } from "cookies-next";
 import type { NextPage } from "next";
 import { NextRouter, useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 
-const login = async (event: FormEvent, router: NextRouter) => {
+const login = async (
+    event: FormEvent,
+    router: NextRouter,
+    setLoading: any,
+    setLoginFailed: any
+) => {
     event.preventDefault();
 
     const user = {
@@ -28,6 +34,8 @@ const login = async (event: FormEvent, router: NextRouter) => {
                 router.push("/dashboard");
             } else {
                 // login failed
+                setLoading(false);
+                setLoginFailed(true);
             }
         });
 };
@@ -36,6 +44,7 @@ const Home: NextPage = () => {
     const router = useRouter();
 
     const [loading, setLoading] = useState(false);
+    const [loginFailed, setLoginFailed] = useState(false);
 
     return (
         <>
@@ -53,9 +62,37 @@ const Home: NextPage = () => {
                             </h2>
                         </div>
                         <div className="mt-8">
+                            <div
+                                className={
+                                    !loginFailed
+                                        ? "hidden"
+                                        : "rounded-md bg-red-50 p-4"
+                                }
+                            >
+                                <div className="flex">
+                                    <div className="flex-shrink-0">
+                                        <XCircleIcon
+                                            className="h-5 w-5 text-red-400"
+                                            aria-hidden="true"
+                                        />
+                                    </div>
+                                    <div className="ml-3">
+                                        <div className="text-sm font-medium text-red-800">
+                                            Username or password is incorrect.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="mt-6">
                                 <form
-                                    onSubmit={(e) => login(e, router)}
+                                    onSubmit={(e) =>
+                                        login(
+                                            e,
+                                            router,
+                                            setLoading,
+                                            setLoginFailed
+                                        )
+                                    }
                                     method="POST"
                                     className="space-y-6"
                                 >
