@@ -24,6 +24,8 @@ npm install
 npm run dev
 ```
 
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
 ## Environment Variables
 
 ```
@@ -32,8 +34,6 @@ API_KEY=<Alechmy API Key>
 PRIVATE_KEY=<WALLET PRIVATE KEY>
 CONTRACT_ADDRESS=<USERS SMART CONTRACT ADDRESS>
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Hardhat
 
