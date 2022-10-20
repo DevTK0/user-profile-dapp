@@ -18,9 +18,9 @@ export default async function handler(
 
     const { user, session } = req.body;
 
-    const success = await users.logout(user, session);
+    const logoutTx = await users.logout(user, session);
+    const result = await logoutTx.wait();
+    const success = result.events[0].args.value;
 
-    return res
-        .status(200)
-        .json({ message: `${user} logout ${success ? "success" : " failed"}` });
+    return res.status(200).json({ message: `${user} ${success}` });
 }

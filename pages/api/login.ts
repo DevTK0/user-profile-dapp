@@ -16,13 +16,17 @@ export default async function handler(
     const signer = new ethers.Wallet(PRIVATE_KEY, provider);
     const users = new ethers.Contract(CONTRACT_ADDRESS, contract.abi, signer);
 
-    const { user, password } = req.body;
+    const { username, password } = req.body;
 
-    const session = await users.login(user, password);
+    const loginTx = await users.login(username, password);
+    const result = await loginTx.wait();
+    const session = result.events[0].args.value;
 
-    console.log(session);
+    if (session === "0x0000000000000000000000000000000000000000") {
+        return res.status(401).json({ message: `Login failed` });
+    }
 
     return res
         .status(200)
-        .json({ message: `${user} login successful: ${session}` });
+        .json({ message: `${username} logged in`, session: session });
 }

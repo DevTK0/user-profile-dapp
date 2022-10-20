@@ -17,6 +17,9 @@ contract Session {
 }
 
 contract Users {
+    event LoginEvent(address value);
+    event LogoutEvent(string value);
+
     struct UserData {
         string user;
         string password;
@@ -36,18 +39,15 @@ contract Users {
         return (users[key].user, users[key].password);
     }
 
-    function login(string memory user, string memory password)
-        public
-        returns (address)
-    {
+    function login(string memory user, string memory password) public {
         bool result = compareStrings(users[user].password, password);
 
         if (result) {
             Session session = new Session(user, block.timestamp);
             sessions[user].push(address(session));
-            return address(session);
+            emit LoginEvent(address(session));
         } else {
-            return address(0);
+            emit LoginEvent(address(0));
         }
     }
 
@@ -58,10 +58,12 @@ contract Users {
                 Session(sessionList[i]).logoutSession(block.timestamp);
                 sessionList[i] = sessionList[sessionList.length - 1];
                 sessionList.pop();
+                emit LogoutEvent("logout successful");
                 return true;
             }
         }
 
+        emit LogoutEvent("logout failed");
         return false;
     }
 
