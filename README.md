@@ -10,7 +10,7 @@ The prototype should support the following functions:
 
 ## Deployment
 
-This project is deployed to Railway at the following url:
+This project is deployed to Railway at the following url:  
 https://user-profile-dapp-production.up.railway.app
 
 ## Local Development
