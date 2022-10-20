@@ -31,7 +31,7 @@ const login = async (
             if (session) {
                 setCookie("user", user.username);
                 setCookie("session", session);
-                router.push("/dashboard");
+                router.push("/admin");
             } else {
                 // login failed
                 setLoading(false);
