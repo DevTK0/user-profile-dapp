@@ -31,7 +31,7 @@ const login = async (
             if (session) {
                 setCookie("user", user.username);
                 setCookie("session", session);
-                router.push("/admin");
+                router.push("/treasure-island");
             } else {
                 // login failed
                 setLoading(false);

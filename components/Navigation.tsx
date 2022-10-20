@@ -6,8 +6,9 @@ import { getCookie, setCookie } from "cookies-next";
 import { NextRouter, useRouter } from "next/router";
 
 const navigation = [
-    { name: "Admin", href: "/admin", current: true },
-    { name: "Search", href: "/secret-treasure", current: true },
+    { name: "Admin", href: "/admin-panel", current: true },
+    { name: "Sessions", href: "/sessions", current: true },
+    { name: "Find Treasure", href: "/treasure-island", current: true },
 ];
 
 function classNames(...classes: string[]) {
