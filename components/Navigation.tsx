@@ -1,17 +1,9 @@
 import type { NextPage } from "next";
-import { Fragment, useEffect, useState } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { useEffect, useState } from "react";
+import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import { getCookie, setCookie } from "cookies-next";
 import { NextRouter, useRouter } from "next/router";
-
-const profile = {
-    name: "Tom Cook",
-    email: "tom@example.com",
-    imageUrl:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
 
 const navigation = [{ name: "Dashboard", href: "#", current: true }];
 
@@ -127,7 +119,14 @@ const Navigation: NextPage = () => {
                                                         ? "hidden"
                                                         : "inline-flex items-center px-3.5 py-2 border border-transparent text-sm leading-4 font-medium rounded-full shadow-sm text-white bg-white-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                                 }
-                                                onClick={() => setLoading(true)}
+                                                onClick={() => {
+                                                    setLoading(true);
+                                                    signOut(
+                                                        user,
+                                                        session,
+                                                        router
+                                                    );
+                                                }}
                                             >
                                                 Sign Out
                                             </button>
