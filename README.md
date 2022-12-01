@@ -8,11 +8,6 @@ The prototype should support the following functions:
 -   session monitoring and management (monitor login sessions, block existing user session)
 -   role based access permissions
 
-## Deployment
-
-This project is deployed to Railway at the following url:  
-https://user-profile-dapp-production.up.railway.app
-
 ## Local Development
 
 Please ensure that you have node installed on your computer.
